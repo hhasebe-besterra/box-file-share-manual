@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Box ファイル共有マニュアル｜ベステラ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --box-blue: #0061d5;
+  --box-blue-dark: #0044a3;
+  --box-blue-bg: #e8f1ff;
+  --ink: #0f172a;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --bg: #fafbfc;
+  --warn: #f59e0b;
+  --warn-bg: #fff7ed;
+  --good: #14b8a6;
+  --good-bg: #ecfdf5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.7;
+  font-size: 16px;
+}
+.hero {
+  background: linear-gradient(135deg, #0061d5 0%, #003c8a 100%);
+  color: #fff;
+  padding: 80px 24px 100px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 600px; height: 600px;
+  top: -200px; right: -200px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+  border-radius: 50%;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 400px; height: 400px;
+  bottom: -150px; left: -100px;
+  background: radial-gradient(circle, rgba(0,191,165,0.15), transparent);
+  border-radius: 50%;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+.hero-label {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  background: rgba(255,255,255,0.15);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 900;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.hero h1 .accent { color: #00bfa5; }
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+.toc {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  padding: 20px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: left;
+  backdrop-filter: blur(10px);
+}
+.toc h3 { font-size: 14px; margin-bottom: 12px; letter-spacing: 1px; }
+.toc ol { padding-left: 24px; columns: 2; column-gap: 32px; }
+.toc li { margin-bottom: 6px; }
+.toc a { color: #fff; text-decoration: none; font-size: 14px; }
+.toc a:hover { color: #00bfa5; }
+
+main { max-width: 1080px; margin: -50px auto 0; padding: 0 24px 100px; }
+
+.step {
+  background: #fff;
+  border-radius: 20px;
+  padding: 48px 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+  position: relative;
+}
+.step-num {
+  display: inline-block;
+  background: var(--box-blue);
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 2px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+.step h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 900;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+.step .lead {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.8;
+}
+
+figure {
+  margin: 24px 0;
+  position: relative;
+}
+figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  display: block;
+}
+figcaption {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.hint {
+  background: var(--box-blue-bg);
+  border-left: 4px solid var(--box-blue);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.hint strong { color: var(--box-blue); }
+
+.warn {
+  background: var(--warn-bg);
+  border-left: 4px solid var(--warn);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.warn strong { color: var(--warn); }
+
+.good {
+  background: var(--good-bg);
+  border-left: 4px solid var(--good);
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.good strong { color: var(--good); }
+
+ol.ordered, ul.bulleted { margin: 16px 0 16px 24px; }
+ol.ordered li, ul.bulleted li { margin-bottom: 8px; line-height: 1.8; }
+
+.kbd {
+  display: inline-block;
+  font-family: 'Inter', monospace;
+  font-size: 13px;
+  padding: 2px 8px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+.divider {
+  height: 1px;
+  background: var(--line);
+  margin: 32px 0;
+}
+
+footer {
+  background: var(--ink);
+  color: #94a3b8;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 14px;
+}
+footer a { color: #00bfa5; text-decoration: none; }
+
+.callout-box {
+  background: linear-gradient(135deg, #0061d5 0%, #003c8a 100%);
+  color: #fff;
+  border-radius: 16px;
+  padding: 32px 28px;
+  margin: 24px 0;
+  text-align: center;
+}
+.callout-box h3 { font-size: 22px; margin-bottom: 8px; }
+.callout-box p { opacity: 0.9; font-size: 14px; }
+
+.zoom { cursor: zoom-in; transition: transform 0.2s; }
+.zoom:hover { transform: scale(1.02); }
+
+@media (max-width: 720px) {
+  .step { padding: 32px 20px; }
+  .toc ol { columns: 1; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <span class="hero-label">BESTERRA × BOX</span>
+    <h1>Box で <span class="accent">ファイルを社外に送る</span><br>かんたんガイド</h1>
+    <p class="hero-sub">招待メールの受け取り方から、取引先への共有リンク送付まで、<br>このマニュアル1つで完結します。</p>
+
+    <nav class="toc">
+      <h3>このマニュアルの流れ</h3>
+      <ol>
+        <li><a href="#step1">招待メールを受け取る</a></li>
+        <li><a href="#step2">パスワードを設定する</a></li>
+        <li><a href="#step3">Box にログインする</a></li>
+        <li><a href="#step4">自分のフォルダを開く</a></li>
+        <li><a href="#step5">ファイルをアップロード</a></li>
+        <li><a href="#step6">共有リンクを作る</a></li>
+        <li><a href="#step7">取引先にリンクを送る</a></li>
+        <li><a href="#tips">困ったとき / ヒント</a></li>
+      </ol>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="step" id="step1">
+  <span class="step-num">STEP 1</span>
+  <h2>招待メールを受け取る</h2>
+  <p class="lead">
+    Box から、英語のタイトルで招待メールが届きます。差出人は <strong>Box &lt;no-reply@box.com&gt;</strong> です。
+    迷惑メールフォルダに入る場合があるので、見当たらない時は確認してみてください。
+  </p>
+
+  <div class="hint">
+    <strong>メールの目印:</strong><br>
+    差出人: <span class="kbd">Box &lt;no-reply@box.com&gt;</span><br>
+    件名: <span class="kbd">You're invited to use Box at Besterra Co., Ltd.</span> ／ <span class="kbd">Welcome to Box</span> など
+  </div>
+
+  <p class="lead" style="margin-top: 24px;">
+    メール本文の <strong>「Accept Invite」</strong> または <strong>「アカウントを作成」</strong> ボタンをクリックすると、パスワード設定画面に進みます。
+  </p>
+</section>
+
+<section class="step" id="step2">
+  <span class="step-num">STEP 2</span>
+  <h2>パスワードを設定する</h2>
+  <p class="lead">
+    招待メールから移動した先で、自分の好きなパスワードを設定します。
+    Box で使うパスワードは、社内のパスワードと別で大丈夫です。
+  </p>
+
+  <div class="warn">
+    <strong>パスワードの条件:</strong><br>
+    8文字以上、英大文字・小文字・数字を含めるのが安全です。
+  </div>
+
+  <ol class="ordered">
+    <li>招待メールの「Accept Invite」リンクを開く</li>
+    <li>表示された画面で、新しいパスワードを2回入力する</li>
+    <li>「同意する」「Continue」などをクリックして完了</li>
+  </ol>
+
+  <p class="lead" style="margin-top: 16px;">
+    これで Box アカウントが有効になりました。
+  </p>
+</section>
+
+<section class="step" id="step3">
+  <span class="step-num">STEP 3</span>
+  <h2>Box にログインする</h2>
+  <p class="lead">
+    ブラウザで <a href="https://besterra.app.box.com" target="_blank" style="color: var(--box-blue); font-weight: bold;">https://besterra.app.box.com</a> を開いて、メールアドレスとパスワードを入力します。
+  </p>
+
+  <figure>
+    <img class="zoom" src="screenshots/01_login.png" alt="Box ログイン画面（メールアドレス入力）">
+    <figcaption>① メールアドレス（@besterra.co.jp）を入力して「次へ」</figcaption>
+  </figure>
+
+  <figure>
+    <img class="zoom" src="screenshots/02_password.png" alt="Box パスワード入力画面">
+    <figcaption>② STEP 2 で設定したパスワードを入力して「ログイン」</figcaption>
+  </figure>
+
+  <figure>
+    <img class="zoom" src="screenshots/03_main_dashboard.png" alt="Box メイン画面">
+    <figcaption>③ ログイン成功すると、Boxのメイン画面が表示されます</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step4">
+  <span class="step-num">STEP 4</span>
+  <h2>自分のフォルダを開く</h2>
+  <p class="lead">
+    ベステラの Box には <strong>「90.ファイル転送用」</strong> というフォルダがあります。<br>
+    その中に、あなた専用のフォルダ（メールアドレスの @ より前の文字列）を用意してあります。
+  </p>
+
+  <figure>
+    <img class="zoom" src="screenshots/10_parent_folder.png" alt="90.ファイル転送用フォルダの一覧">
+    <figcaption>「90.ファイル転送用」フォルダを開くと、自分の名前のサブフォルダが見えます</figcaption>
+  </figure>
+
+  <div class="good">
+    <strong>あなただけのスペースです:</strong><br>
+    自分のフォルダは、長谷部とご本人だけが見られる設定になっています。
+    他の社員には見えません。安心してご利用ください。
+  </div>
+
+  <figure>
+    <img class="zoom" src="screenshots/05_personal_folder.png" alt="自分のフォルダを開いたところ">
+    <figcaption>自分のフォルダの中身（最初は空です）</figcaption>
+  </figure>
+</section>
+
+<section class="step" id="step5">
+  <span class="step-num">STEP 5</span>
+  <h2>ファイルをアップロードする</h2>
+  <p class="lead">
+    社外に送りたいファイルを、自分のフォルダにアップロードします。
+    やり方は2通り。お好きな方でどうぞ。
+  </p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 12px; color: var(--box-blue);">方法 A: ドラッグ &amp; ドロップ</h3>
+  <p>パソコンのファイルを、Boxの画面に <strong>そのまま引っ張ってきて落とす</strong> だけ。</p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 12px; color: var(--box-blue);">方法 B: 「新規」ボタンからアップロード</h3>
+  <p>画面右上の <strong>「新規」</strong> ボタンをクリックして、「ファイルのアップロード」を選びます。</p>
+
+  <figure>
+    <img class="zoom" src="screenshots/08_upload_menu.png" alt="新規ボタンを押したところのメニュー">
+    <figcaption>「新規」ボタンからメニューが開いて、ファイル/フォルダのアップロードが選べます</figcaption>
+  </figure>
+
+  <div class="hint">
+    <strong>大きなファイルもOK:</strong><br>
+    Boxは1ファイル <strong>最大15GB</strong> までアップロードできます。
+    メール添付では送れないサイズも、Boxなら問題ありません。
+  </div>
+</section>
+
+<section class="step" id="step6">
+  <span class="step-num">STEP 6</span>
+  <h2>共有リンクを作る</h2>
+  <p class="lead">
+    アップロードしたファイル（またはフォルダ）の<strong>共有リンク</strong>を作ります。
+    このリンクを取引先に送れば、相手はBoxアカウントなしでもダウンロードできます。
+  </p>
+
+  <ol class="ordered">
+    <li>共有したいファイル（またはフォルダ）の上で右上の <strong>「共有」</strong> ボタンをクリック</li>
+    <li>表示されたダイアログで <strong>「共有リンク」のスイッチをオン</strong> にする</li>
+    <li>リンクが生成されるので、<strong>「コピー」</strong> ボタンを押す</li>
+  </ol>
+
+  <figure>
+    <img class="zoom" src="screenshots/06_share_link_created.png" alt="共有リンク作成ダイアログ">
+    <figcaption>「共有リンク」をオンにすると、URLが自動生成されます</figcaption>
+  </figure>
+
+  <h3 style="font-size: 18px; margin: 32px 0 12px; color: var(--box-blue);">アクセス範囲・パスワード・期限を設定する</h3>
+  <p>もう少し細かく設定したい時は、ダイアログ内の <strong>「リンク設定」</strong> をクリックします。</p>
+
+  <figure>
+    <img class="zoom" src="screenshots/07_link_settings.png" alt="共有リンクの詳細設定">
+    <figcaption>詳細設定画面：誰がアクセスできるか、パスワード、有効期限などを指定できます</figcaption>
+  </figure>
+
+  <div class="warn">
+    <strong>社外送付の推奨設定:</strong>
+    <ul class="bulleted" style="margin-top: 8px;">
+      <li><strong>アクセス範囲</strong>: 「リンクを知っている全員」</li>
+      <li><strong>パスワード</strong>: 設定する（取引先には別メール or 電話で伝える）</li>
+      <li><strong>有効期限</strong>: 必要な期間（例: 7日 / 14日）を設定</li>
+      <li><strong>ダウンロード可否</strong>: 「表示およびダウンロード可能」</li>
+    </ul>
+  </div>
+</section>
+
+<section class="step" id="step7">
+  <span class="step-num">STEP 7</span>
+  <h2>取引先にリンクを送る</h2>
+  <p class="lead">
+    コピーした共有リンクを、メールに貼り付けて取引先に送ります。
+  </p>
+
+  <div class="hint">
+    <strong>メール文例:</strong>
+    <pre style="background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-top: 12px; font-family: 'Noto Sans JP'; font-size: 14px; white-space: pre-wrap;">
+○○様
+
+お疲れ様です。ベステラの△△です。
+
+ご依頼の資料をBoxの共有リンクで送付いたします。
+
+【ダウンロードURL】
+https://besterra.box.com/s/xxxxxxxxxx
+
+【パスワード】
+別途メールにてお送りします。
+
+【有効期限】
+2026年5月22日まで
+
+ご確認のほど、よろしくお願いいたします。</pre>
+  </div>
+
+  <div class="good">
+    <strong>パスワードは別便で:</strong><br>
+    URLとパスワードは、別のメール or 電話で伝えるのが安全です。
+  </div>
+</section>
+
+<section class="step" id="tips">
+  <span class="step-num">TIPS &amp; FAQ</span>
+  <h2>困ったとき・よくある質問</h2>
+
+  <h3 style="font-size: 18px; margin: 24px 0 8px;">Q. パスワードを忘れてしまった</h3>
+  <p>ログイン画面の「パスワードをリセット」をクリックして、メールから再設定してください。それでもダメな場合は長谷部までご連絡を。</p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 8px;">Q. 招待メールが見当たらない</h3>
+  <p>迷惑メールフォルダをご確認ください。それでもなければ、長谷部に再送付を依頼してください。</p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 8px;">Q. 自分のフォルダが見つからない</h3>
+  <p>ログイン後、左メニューの「すべてのファイル」→「90.ファイル転送用」と進んでください。中に自分の名前のフォルダがあります。</p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 8px;">Q. スマホからも使える？</h3>
+  <p>はい。Box のスマホアプリ（iOS / Android）からも同じアカウントでログインできます。</p>
+
+  <h3 style="font-size: 18px; margin: 24px 0 8px;">Q. Box Drive って何？</h3>
+  <p>PCにインストールすると、Windowsのエクスプローラーから普通のフォルダのようにBoxを使えるアプリです。今後別途ご案内します。</p>
+
+  <div class="callout-box">
+    <h3>困ったら、いつでも</h3>
+    <p>長谷部までお気軽にどうぞ。<br>📩 h.hasebe@besterra.co.jp ／ 💬 Slack でもOK</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>ベステラ株式会社 — Box ファイル共有マニュアル<br>
+  作成: 2026年5月15日 / 脱炭素事業推進部 長谷部</p>
+</footer>
+
+<script>
+// 画像クリックでフルスクリーン拡大
+document.querySelectorAll('.zoom').forEach(img => {
+  img.addEventListener('click', () => {
+    const overlay = document.createElement('div');
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;padding:40px';
+    const big = document.createElement('img');
+    big.src = img.src;
+    big.style.cssText = 'max-width:100%;max-height:100%;object-fit:contain';
+    overlay.appendChild(big);
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
+  });
+});
+</script>
+
+</body>
+</html>
